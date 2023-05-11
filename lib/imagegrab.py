@@ -36,7 +36,8 @@ elif sys.platform == "darwin":
             img = screenshot.convert("RGB")
             with io.BytesIO() as output:
                 img.save(output, format="JPEG", quality=20)
-                return output.getvalue()
+                output.seek(0)
+                return Image.open(output)
 
 
 else:
