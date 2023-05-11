@@ -3,3 +3,4 @@ pynput
 numpy
 Pillow-PIL
 elevate
+pyautogui
