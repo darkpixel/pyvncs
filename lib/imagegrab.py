@@ -1,4 +1,4 @@
-import sys, pyautogui
+import io, sys, pyautogui
 from PIL import Image
 from lib import log
 
@@ -21,19 +21,23 @@ if sys.platform == "linux" or sys.platform == "linux2":
 
 elif sys.platform == "darwin":
     log.debug("ImageGrab: running on darwin")
-    import Quartz.CoreGraphics as CG
+    
     class ImageGrab():
         @staticmethod
         def grab():
+            # Take a screenshot using PyAutoGUI
             screenshot = pyautogui.screenshot()
+
+            # Reduce the size of the image while maintaining the aspect ratio
             width, height = screenshot.size
-            pixeldata = screenshot.convert("RGBA").tobytes()
+            screenshot = screenshot.resize((width, height))
 
-            i = Image.frombytes("RGBA", (width, height), pixeldata)
-            (b, g, r, x) = i.split()
-            i = Image.merge("RGBX", (r, g, b, x))
+            # Convert the image to RGBX format and return it as a JPEG-encoded byte stream
+            img = screenshot.convert("RGB")
+            with io.BytesIO() as output:
+                img.save(output, format="JPEG", quality=20)
+                return output.getvalue()
 
-            return i
 
 else:
     log.debug("ImageGrab: running on Unknown!")
