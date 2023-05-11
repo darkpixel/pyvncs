@@ -26,11 +26,8 @@ elif sys.platform == "darwin":
         @staticmethod
         def grab():
             screenshot = pyautogui.screenshot()
-            width = CG.CGImageGetWidth(screenshot)
-            height = CG.CGImageGetHeight(screenshot)
-            bytesperrow = CG.CGImageGetBytesPerRow(screenshot)
-
-            pixeldata = CG.CGDataProviderCopyData(CG.CGImageGetDataProvider(screenshot))
+            width, height = screenshot.size
+            pixeldata = screenshot.convert("RGBA").tobytes()
 
             i = Image.frombytes("RGBA", (width, height), pixeldata)
             (b, g, r, x) = i.split()
