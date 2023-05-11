@@ -1,4 +1,4 @@
-import sys
+import sys, pyautogui
 from PIL import Image
 from lib import log
 
@@ -25,7 +25,7 @@ elif sys.platform == "darwin":
     class ImageGrab():
         @staticmethod
         def grab():
-            screenshot = CG.CGWindowListCreateImage(CG.CGRectInfinite, CG.kCGWindowListOptionOnScreenOnly, CG.kCGNullWindowID, CG.kCGWindowImageDefault)
+            screenshot = pyautogui.screenshot()
             width = CG.CGImageGetWidth(screenshot)
             height = CG.CGImageGetHeight(screenshot)
             bytesperrow = CG.CGImageGetBytesPerRow(screenshot)
