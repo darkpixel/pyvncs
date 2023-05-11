@@ -34,10 +34,10 @@ elif sys.platform == "darwin":
 
             # Convert the image to RGBX format and return it as a JPEG-encoded byte stream
             img = screenshot.convert("RGB")
-            with io.BytesIO() as output:
-                img.save(output, format="JPEG", quality=20)
-                output.seek(0)
-                return Image.open(output)
+            output =io.BytesIO()
+            img.save(output, format="JPEG", quality=20)
+            output.seek(0)
+            return Image.open(output)
 
 
 else:
