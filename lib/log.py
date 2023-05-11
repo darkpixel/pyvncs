@@ -38,15 +38,18 @@ def _log(*args, logtype='debug'):
     f(_str)
 
 def __getattr__(name):
+    
+#     logging off
 
     def method(*args):
-        _str = ''
-        if args:
-            for s in args:
-                _str = "%s %s" % (_str, s)
-            _str = _str.strip()
+        pass
+#         _str = ''
+#         if args:
+#             for s in args:
+#                 _str = "%s %s" % (_str, s)
+#             _str = _str.strip()
 
-        _log(_str, logtype=name)
+#         _log(_str, logtype=name)
 
     return method
 
