@@ -20,5 +20,6 @@ setup(
     author="Matias Fernandez",
     author_email="matias.fernandez@gmail.com",
     packages=["pyvncs"],
+    install_requires=["pyDes", "pynput", "numpy", "Pillow-PIL", "elevate", "pyautogui"],
     zip_safe=False,
 )
